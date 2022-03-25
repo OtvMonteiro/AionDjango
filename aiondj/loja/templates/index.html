@@ -15,7 +15,12 @@
 			<div class="row mx-auto">
 				{% for produto in produtos %}
 				<div class="card mx-auto mb-3" id={{produto.id}} style="width: 18rem;">
-					<img class="card-img-top" src="{{produto.image.url}}" alt="Card image cap">
+					{% if produto.imagem %}
+						<img class="card-img-top" src="{{produto.imagem.url}}" alt="Card image cap">
+					{% else %}
+					<img class="card-img-top" src="https://icon-library.com/images/products-icon/products-icon-9.jpg" alt="Card image cap">				
+					{% endif %}
+
 					<div class="card-body">
 						<p class="card-title">{{produto.nome}}</p>
 						<p class="card-text"><b>{{produto.preco_unitario|currency}}</b></p>
@@ -23,11 +28,12 @@
 
 					<div class="card-footer p-0 no-gutters">
 
-						<form action="/checkout" method="POST" class="btn-block">
+						<form action="/#{{product.id}}" method="POST" class="btn-block">
 							{% csrf_token %}
 							<input hidden type="text" name='produto' value='{{produto.id}}'>
-							<input type="submit" class="float-right btn btn-success form-control"
-								value="Comprar">
+							<input type="submit" class="float-right btn btn-success form-control nav-link"
+							 value="Comprar">
+							<a class="nav-link" href="/checkout" value="Comprar"><span class="sr-only">(current)</span></a>
 						</form>
 
 					</div>

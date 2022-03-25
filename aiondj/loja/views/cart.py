@@ -10,4 +10,4 @@ class Cart(View):
         produtos = Produtos.get_produtos_by_id(ids)
         print(produtos)
         #return render(request , 'cart.html' , {'produtos' : produtos} )
- 
+

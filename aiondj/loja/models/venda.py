@@ -18,3 +18,4 @@ class Vendas(models.Model):
     def finalizarCompra(self):
         self.save()
         # considerar aqui caso for invalida a compra (estoque<quantidade)?
+ 

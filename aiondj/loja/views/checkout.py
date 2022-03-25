@@ -11,7 +11,6 @@ from loja.models.venda import Vendas
 
 class CheckOut(View):
     def post(self, request):
-        quantidade = int(0)
         quantidade = request.POST.get('quantidade')
        
         email = request.POST.get('email')
@@ -31,9 +30,9 @@ class CheckOut(View):
                           cpf = cpf,
                           nome = nome, 
                           endereco=endereco,
-                          id_produto=produto.id,
-                          quantidade=quantidade,
-                          valor_total = multiply(quantidade, produto.preco_unitario))
+                          id_produto=produto,
+                          quantidade=int(quantidade or 0),
+                          valor_total = multiply(int(quantidade or 0), produto.preco_unitario))
             venda.save()
         request.session['cart'] = {}
 
