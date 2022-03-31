@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=50)),
-                ('imagem', models.ImageField(upload_to='aiondj/uploads/produtos/')),
+                ('imagem', models.ImageField(upload_to='uploads/produtos/')),
                 ('preco_unitario', models.IntegerField(default=0)),
                 ('estoque', models.IntegerField(default=0)),
             ],

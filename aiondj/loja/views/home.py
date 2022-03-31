@@ -9,26 +9,12 @@ class Index(View):
         produto = request.POST.get('produto')
         remove = request.POST.get('remove')
         cart = request.session.get('cart')
-        if cart:
-            quantity = cart.get(produto)
-            if quantity:
-                if remove:
-                    if quantity<=1:
-                        cart.pop(produto)
-                    else:
-                        cart[produto]  = quantity-1
-                else:
-                    cart[produto]  = quantity+1
-
-            else:
-                cart[produto] = 1
-        else:
-            cart = {}
-            cart[produto] = 1
+        cart = {}
+        cart[produto] = 1
 
         request.session['cart'] = cart
         print('cart' , request.session['cart'])
-        return redirect('homepage')
+        return redirect('checkout')
 
 
 
@@ -41,7 +27,7 @@ def loja(request):
     if not cart:
         request.session['cart'] = {}
     produtos = None
-    produtos = Produtos.get_all_produtos();
+    produtos = Produtos.get_all_produtos();  
 
     data = {}
     data['produtos'] = produtos

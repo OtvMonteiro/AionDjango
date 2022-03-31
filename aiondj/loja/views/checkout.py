@@ -36,4 +36,4 @@ class CheckOut(View):
             venda.save()
         request.session['cart'] = {}
 
-        return redirect('cart')
+        return redirect('homepage')
