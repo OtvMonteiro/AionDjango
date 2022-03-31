@@ -6,6 +6,7 @@ from loja.models.produto import Produtos
 
 class Checkout(View):
     def get(self , request):
+        # produtos = request.get(produtos)
         ids = list(request.session.get('checkout').keys())
         produtos = Produtos.get_produtos_by_id(ids)
         print(produtos)
