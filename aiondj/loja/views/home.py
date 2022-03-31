@@ -8,12 +8,12 @@ class Index(View):
     def post(self , request):
         produto = request.POST.get('produto')
         remove = request.POST.get('remove')
-        cart = request.session.get('cart')
-        cart = {}
-        cart[produto] = 1
+        checkout = request.session.get('checkout')
+        checkout = {}
+        checkout[produto] = 1
 
-        request.session['cart'] = cart
-        print('cart' , request.session['cart'])
+        request.session['checkout'] = checkout
+        print('checkout' , request.session['checkout'])
         return redirect('checkout')
 
 
@@ -23,9 +23,9 @@ class Index(View):
         return HttpResponseRedirect(f'/loja{request.get_full_path()[1:]}')
 
 def loja(request):
-    cart = request.session.get('cart')
-    if not cart:
-        request.session['cart'] = {}
+    checkout = request.session.get('checkout')
+    if not checkout:
+        request.session['checkout'] = {}
     produtos = None
     produtos = Produtos.get_all_produtos();  
 

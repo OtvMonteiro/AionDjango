@@ -2,16 +2,15 @@
 
 
 {% block content %}
-{% load cart %}
+{% load checkout %}
 {% load custom_filter %}
 <div class="container">
    <div class="border rounded p-4 m-4">
-        <p class="display-4 pl-4 ml-4 btn btn-success rounded-pill">Your Cart</p>
+        <p class="display-4 pl-4 ml-4 btn btn-success rounded-pill">Your Checkout</p>
         <hr>
-        <table class="table">
+        {% comment %} <table class="table">
             <thead>
                 <tr>
-                    <th>Sno.</th>
                     <th>Image</th>
                     <th>Product</th>
                     <th>Price</th>
@@ -27,8 +26,8 @@
                     <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
                     <td>{{product.name}}</td>
                     <td>{{product.price|currency}}</td>
-                    <td>{{product|cart_quantity:request.session.cart}}</td>
-                    <td>{{product|price_total:request.session.cart|currency}}</td>
+                    <td>{{product|cart_quantity:request.session.checkout}}</td>
+                    <td>{{product|price_total:request.session.checkout|currency}}</td>
                 </tr>
 
                 {% endfor %}
@@ -39,10 +38,10 @@
                 <tr>
                     <th colspan="4"></th>
                     <th class="" colspan="">Total</th>
-                    <th>{{products|total_cart_price:request.session.cart|currency}}</th>
+                    <th>{{products|total_cart_price:request.session.checkout|currency}}</th>
                 </tr>
             </tfoot>
-        </table>
+        </table> {% endcomment %}
         <hr>
         <div class="m-3 p-3">
             <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-success border rounded  col-lg-3 float-right">Check out</a>
@@ -70,6 +69,12 @@
           <div class="m-2 p-3">
             <form action="/checkout" method="POST">
                 {% csrf_token %}
+                
+                <div class="form-group">
+                  <label for="">Quantidade</label>
+                  <input type="number" step="1" name="quantidade" id="" class="form-control" placeholder="" aria-describedby="helpId" onchange="this.value = parseInt(this.value);">
+                </div>
+                
                 <div class="form-group">
                   <label for="">Email</label>
                   <input type="text" name="email" id="" class="form-control" placeholder="" aria-describedby="helpId">
@@ -90,10 +95,7 @@
                   <input type="text" name="endereco" id="" class="form-control" placeholder="" aria-describedby="helpId">
                   
                 </div>
-                <div class="form-group">
-                    <label for="">Quantidade</label>
-                    <input type="number" step="1" name="quantidade" id="" class="form-control" placeholder="" aria-describedby="helpId" onchange="this.value = parseInt(this.value);">
-                  </div>
+                
 
                   <input type="submit" class="btn float-right btn-outline-success col-lg-6" value="Check out">
             </form>
