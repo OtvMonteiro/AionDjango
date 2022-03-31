@@ -8,40 +8,30 @@
    <div class="border rounded p-4 m-4">
         <p class="display-4 pl-4 ml-4 btn btn-success rounded-pill">Your Checkout</p>
         <hr>
-        {% comment %} <table class="table">
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Image</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
+                    <th>Nº</th>
+                    <th>Imagem</th>
+                    <th>Produto</th>
+                    <th>Preço Unitário</th>
                 </tr>
             </thead>
             <tbody>
                 
-                {% for product in products %}
+                {% for produto in produtos %}
                 <tr>
                     <td>{{forloop.counter}}</td>
-                    <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.price|currency}}</td>
-                    <td>{{product|cart_quantity:request.session.checkout}}</td>
-                    <td>{{product|price_total:request.session.checkout|currency}}</td>
+                    <td><img style="height: 80px;" class="rounded-circle" src="{{produto.imagem.url}}" alt=""></td>
+                    <td>{{produto.nome}}</td>
+                    <td>{{produto.preco_unitario|currency}}</td>
                 </tr>
 
                 {% endfor %}
                
             </tbody>
 
-            <tfoot>
-                <tr>
-                    <th colspan="4"></th>
-                    <th class="" colspan="">Total</th>
-                    <th>{{products|total_cart_price:request.session.checkout|currency}}</th>
-                </tr>
-            </tfoot>
-        </table> {% endcomment %}
+        </table>
         <hr>
         <div class="m-3 p-3">
             <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-success border rounded  col-lg-3 float-right">Check out</a>

@@ -29,10 +29,10 @@ class Finalizar(View):
                           cpf = cpf,
                           nome = nome, 
                           endereco=endereco,
-                          id_produto=produto,
+                          id_produto=produto.id,
                           quantidade=int(quantidade or 0),
                           valor_total = multiply(int(quantidade or 0), produto.preco_unitario))
             venda.save()
         request.session['checkout'] = {}
 
-        return redirect('homepage')
+        return redirect('checkout')
